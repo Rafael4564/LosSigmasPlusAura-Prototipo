@@ -1,0 +1,169 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f5f6fa;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.container {
+  width: 80%;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 40px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 40px;
+}
+
+.logo h1 {
+  font-size: 22px;
+  color: #333;
+}
+
+.perfil {
+  text-align: center;
+}
+
+.foto-perfil {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #f1c40f;
+  object-fit: cover;
+}
+
+.nome {
+  font-size: 16px;
+  margin-top: 5px;
+  color: #555;
+}
+
+/* Progresso */
+.progresso {
+  text-align: center;
+  padding: 20px 40px;
+}
+
+.titulo {
+  font-weight: 600;
+  color: #666;
+}
+
+.barra {
+  width: 70%;
+  height: 20px;
+  background-color: #eee;
+  border-radius: 10px;
+  margin: 15px auto;
+  overflow: hidden;
+}
+
+.progresso-barra {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(to right, #f1c40f, #f39c12);
+  border-radius: 10px;
+  transition: width 1.5s ease-in-out;
+}
+
+.porcentagem {
+  color: #b58900;
+  font-weight: 600;
+}
+
+/* Menu */
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px 40px;
+  border-top: 2px solid #f0f0f0;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.menu-item {
+  text-align: center;
+  cursor: pointer;
+  width: 120px;
+  margin: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 8px;
+}
+
+.menu-item p {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Aulas Recentes */
+.aulas-recentes {
+  padding: 30px 40px;
+}
+
+.aulas-recentes h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.aula-card {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.aula-card:hover {
+  transform: scale(1.02);
+}
+
+.aula-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.aula-info p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.aula-info small {
+  color: #777;
+  font-size: 14px;
+}
