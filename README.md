@@ -1,1 +1,0 @@
-# LosSigmasPlusAura-Prototipo
