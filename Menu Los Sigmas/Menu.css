@@ -167,3 +167,39 @@ body {
   color: #777;
   font-size: 14px;
 }
+.menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+/* Cada item */
+.menu-item {
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Imagens */
+.menu-item img {
+  width: 70px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
+/* Texto */
+.menu-item p {
+  font-size: 14px;
+  font-weight: 600;
+}
+
