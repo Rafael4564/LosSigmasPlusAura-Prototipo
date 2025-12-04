@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Perfil do Aluno</title>
+
+  <!-- Fonte elegante -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold: #D4AF37;
+      --gold-600: #b8922f;
+      --gold-700: #a07f28;
+      --gold-50: #fff8e8;
+      --white: #FFFFFF;
+      --black: #0f1217;
+      --text: #1b1f26;
+      --muted: #5b6474;
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --shadow: 0 10px 30px rgba(15, 18, 23, 0.08);
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 12px;
+      --ring: 0 0 0 2px rgba(212, 175, 55, 0.18);
+      --transition: 220ms cubic-bezier(.2, .8, .2, 1);
+    }
+
+    /* Reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--white) 0%, var(--bg) 100%);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; }
+
+    /* Layout */
+    .site-wrap {
+      min-height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    /* Top nav */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: saturate(1.2) blur(6px);
+      background: rgba(255, 255, 255, 0.75);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.18);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 14px;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-logo {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, var(--gold) 0%, var(--gold-700) 65%, #8b6a1c 100%);
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.6), 0 8px 20px rgba(212, 175, 55, 0.22);
+    }
+    .brand-title {
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+    }
+    .nav-link {
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      color: var(--muted);
+      transition: var(--transition);
+    }
+    .nav-link:hover { color: var(--text); background: rgba(212, 175, 55, 0.08); }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      background: var(--white);
+      color: var(--text);
+      transition: var(--transition);
+      box-shadow: 0 1px 0 rgba(212, 175, 55, 0.2);
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+    .btn-primary {
+      background: linear-gradient(180deg, var(--gold) 0%, var(--gold-600) 100%);
+      color: #1d1400;
+      border: none;
+      box-shadow: 0 10px 20px rgba(212, 175, 55, 0.28);
+    }
+    .btn-primary:hover { filter: brightness(1.06); }
+    .menu-toggle {
+      display: none;
+      border: none;
+      background: transparent;
+      padding: 8px;
+      border-radius: 10px;
+    }
+    .menu-toggle:hover { background: rgba(212,175,55,0.12); }
+
+    /* Header hero */
+    .hero {
+      max-width: 1100px;
+      margin: 28px auto 0;
+      padding: 0 20px 24px;
+    }
+    .hero-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 26px;
+      border: 1px solid rgba(212,175,55,0.18);
+      position: relative;
+      overflow: clip;
+    }
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: -40% -20% auto auto;
+      width: 60%;
+      height: 180%;
+      background: radial-gradient(closest-side, rgba(212,175,55,0.15), transparent 65%);
+      transform: rotate(-12deg);
+      pointer-events: none;
+    }
+    .hero-left {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 22px;
+      align-items: center;
+    }
+    .avatar-wrap {
+      position: relative;
+      width: 96px; height: 96px;
+      border-radius: 50%;
+      padding: 6px;
+      background: linear-gradient(180deg, rgba(212,175,55,0.35), rgba(212,175,55,0.05));
+      box-shadow: inset 0 0 0 2px rgba(212,175,55,0.35), 0 15px 30px rgba(212,175,55,0.18);
+    }
+    .avatar {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #3b3f4a 0%, #1f232b 70%, #0f1217 100%);
+      display: grid; place-items: center;
+      color: var(--gold);
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* Preenche o círculo sem distorcer */
+  border-radius: 80%;  /* Mantém formato circular */
+}
+    .header-info {
+      display: grid;
+      gap: 6px;
+    }
+    .title {
+      font-size: clamp(20px, 2.2vw, 26px);
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .hero-right {
+      display: grid;
+      gap: 8px;
+      align-content: center;
+      justify-items: end;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--gold-50);
+      border: 1px solid rgba(212,175,55,0.28);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.7);
+      color: #3a2b0b;
+      font-weight: 500;
+    }
+    .badge svg { color: var(--gold-700); }
+
+    /* Main grid */
+    .main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 22px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(212,175,55,0.18);
+      overflow: hidden;
+    }
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 22px;
+      border-bottom: 1px solid rgba(212,175,55,0.16);
+      background: linear-gradient(180deg, rgba(212,175,55,0.05), transparent);
+    }
+    .card-title {
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-body {
+      padding: 22px;
+      display: grid;
+      gap: 18px;
+    }
+
+    /* Level progress */
+    .level-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 12px;
+    }
+    .level-value {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .progress-wrap {
+      display: grid;
+      gap: 8px;
+    }
+    .progress-label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .progress-bar {
+      position: relative;
+      height: 12px;
+      background: #eceef3;
+      border-radius: 999px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 2px rgba(15,18,23,0.08);
+    }
+    .progress-fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 68%; /* Ajuste do progresso atual */
+      background: linear-gradient(90deg, var(--gold) 0%, var(--gold-600) 100%);
+      box-shadow: 0 8px 16px rgba(212,175,55,0.28);
+      border-radius: 999px;
+      transition: width var(--transition);
+    }
+    .progress-bar:hover .progress-fill { filter: brightness(1.06); }
+
+    /* Stats grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .stat {
+      background: linear-gradient(180deg, var(--white), #fbfbfd);
+      border: 1px solid rgba(212,175,55,0.18);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    .stat:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(15,18,23,0.12); }
+    .stat-label {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.3px;
+      margin-bottom: 8px;
+    }
+    .stat-value {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    /* Achievements */
+    .achievements {
+      display: grid;
+      gap: 14px;
+    }
+    .achievement-banner {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 16px;
+      align-items: center;
+      background: linear-gradient(180deg, var(--gold-50), #fff);
+      border: 1px solid rgba(212,175,55,0.28);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.8), var(--shadow);
+    }
+    .achievement-count {
+      font-size: 24px;
+      font-weight: 700;
+      color: #3a2b0b;
+    }
+    .achievement-label {
+      color: #4b3a12;
+      font-weight: 500;
+    }
+
+    /* Actions */
+    .actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      padding: 18px 22px 24px;
+      border-top: 1px solid rgba(212,175,55,0.16);
+      background: linear-gradient(180deg, transparent, rgba(212,175,55,0.05));
+    }
+    .btn-outline {
+      background: var(--white);
+      color: var(--text);
+      border: 1px solid rgba(212,175,55,0.4);
+    }
+    .btn-outline:hover { box-shadow: var(--shadow); transform: translateY(-1px); }
+    .btn-danger {
+      background: var(--white);
+      color: #8a1f1f;
+      border: 1px solid rgba(138,31,31,0.25);
+    }
+    .btn-danger:hover { box-shadow: 0 10px 30px rgba(138,31,31,0.16); transform: translateY(-1px); }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid rgba(212,175,55,0.18);
+      background: #fff;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 22px 20px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .main { grid-template-columns: 1fr; }
+      .hero-card { grid-template-columns: 1fr; }
+      .hero-right { justify-items: start; }
+      .nav-inner { grid-template-columns: auto auto auto; }
+      .nav-links { display: none; }
+      .menu-toggle { display: inline-flex; }
+    }
+    @media (max-width: 640px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .avatar-wrap { width: 84px; height: 84px; }
+      .hero { margin-top: 18px; }
+      .card-body { padding: 18px; }
+      .card-head { padding: 16px 18px; }
+      .actions { padding: 16px 18px 22px; }
+    }
+
+    /* Utility icons */
+    .icon {
+      width: 20px; height: 20px;
+    }
+    .icon-lg { width: 26px; height: 26px; }
+  </style>
+</head>
+<body>
+  <div class="site-wrap">
+    <!-- Navegação -->
+    <header class="nav">
+      <div class="nav-inner">
+        <div class="brand">
+          <div class="brand-logo">
+  <img src="logo.png" alt="Logo da Academia Sigma">
+</div>
+          <div class="brand-title">Academia Sigma</div>
+        </div>
+
+        <nav class="nav-links" aria-label="Navegação principal">
+          <a class="nav-link" href="#">Perfil</a>
+          <a class="nav-link" href="Menu.html">Cursos</a>
+          <a class="nav-link" href="#">Metas</a>
+          <a class="nav-link" href="#">Configurações</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+            <svg class="icon" viewBox="0 0 24 24" fill="none">
+              <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="btn btn-primary">
+            <svg class="icon" viewBox="0 0 24 24" fill="none">
+              <path d="M12 3l2.6 5.3 5.8.8-4.2 4.1 1 5.7-5.2-2.7-5.2 2.7 1-5.7-4.2-4.1 5.8-.8L12 3z" stroke="currentColor" stroke-width="1.6" fill="currentColor" />
+            </svg>
+            Entrar
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero / Cabeçalho do Perfil -->
+    <section class="hero" aria-labelledby="perfilTitle">
+      <div class="hero-card">
+        <div class="hero-left">
+          <div class="avatar-wrap" aria-hidden="true">
+            <div class="avatar">
+  <img src="perfil.jpg" alt="Foto do aluno Sigma">
+</div>
+            </div>
+          </div>
+          <div class="header-info">
+            <h1 id="perfilTitle" class="title">Perfil do Aluno</h1>
+            <p class="subtitle">Nome do Aluno Sigma</p>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <span class="badge" title="Conquistas totais">
+            <svg class="icon" viewBox="0 0 24 24" fill="none">
+              <path d="M17 3H7a2 2 0 00-2 2v13a2 2 0 002 2l5-2 5 2a2 2 0 002-2V5a2 2 0 00-2-2z" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M9 9l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            67 Conquistas
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conteúdo principal -->
+    <main class="main">
+      <!-- Evolução do Nível -->
+      <section class="card" aria-labelledby="nivelTitle">
+        <div class="card-head">
+          <h2 id="nivelTitle" class="card-title">
+            <svg class="icon" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            Evolução do Nível Sigma
+          </h2>
+        </div>
+        <div class="card-body">
+          <div class="level-row">
+            <div class="level-value">Nível Sigma: 3.5</div>
+            <div class="progress-wrap">
+              <div class="progress-label">Progresso para Nível 4</div>
+              <div class="progress-bar" aria-label="Progresso de nível" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68">
+                <div class="progress-fill"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-outline">
+            <svg class="icon" viewBox="0 0 24 24" fill="none">
+              <path d="M12 4v16M4 12h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            Ver detalhes
+          </button>
+          <button class="btn btn-outline">
+            <svg class="icon" viewBox="0 0 24 24" fill="none">
+              <path d="M12 3l8 18-8-4-8 4 8-18z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            </svg>
+            Missões
+          </button>
+        </div>
+      </section>
+
+      <!-- Estatísticas e Conquistas -->
+      <section class="card" aria-labelledby="estatisticasTitle">
+        <div class="card-head">
+          <h2 id="estatisticasTitle" class="card-title">
+            <svg class="icon" viewBox="0 0 24 24" fill="none">
+              <path d="M4 19h16M6 16v-6M12 16V5M18 16v-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            Estatísticas de Estudo
+          </h2>
+        </div>
+
+        <div class="card-body">
+          <div class="stats-grid">
+            <div class="stat">
+              <div class="stat-label">Cursos Concluídos</div>
+              <div class="stat-value">—</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Horas de Estudos</div>
+              <div class="stat-value">45h</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Minha Aura</div>
+              <div class="stat-value">—</div>
+            </div>
+          </div>
+
+          <div class="achievements">
+            <div class="achievement-banner">
+              <svg class="icon-lg" viewBox="0 0 24 24" fill="none">
+                <path d="M17 3H7a2 2 0 00-2 2v13a2 2 0 002 2l5-2 5 2a2 2 0 002-2V5a2 2 0 00-2-2z" stroke="currentColor" stroke-width="1.6"/>
+                <path d="M9 9l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <div>
+                <div class="achievement-label">Conquistas (Ou metas)</div>
+                <div class="achievement-count">67</div>
+              </div>
+              <button class="btn btn-outline" aria-label="Ver conquistas">Ver todas</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-outline">
+            <svg class="icon" viewBox="0 0 24 24" fill="none">
+              <path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            Adicionar meta
+          </button>
+          <button class="btn btn-outline">
+            <svg class="icon" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M10 10h4v4h-4z" fill="currentColor"/>
+            </svg>
+            Editar
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div>© 2025 Academia Sigma • Todos os direitos reservados</div>
+        <div style="display:flex; gap:12px;">
+          <a href="#" class="nav-link">Termos</a>
+          <a href="#" class="nav-link">Privacidade</a>
+          <a href="#" class="nav-link">Ajuda</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Menu responsivo simples
+    (function() {
+      const toggle = document.getElementById('menuToggle');
+      const links = document.querySelector('.nav-links');
+      if (!toggle || !links) return;
+
+      toggle.addEventListener('click', () => {
+        const isOpen = links.style.display === 'flex';
+        links.style.display = isOpen ? 'none' : 'flex';
+        links.style.flexDirection = 'column';
+        links.style.gap = '10px';
+        links.style.position = 'absolute';
+        links.style.top = '58px';
+        links.style.left = '0';
+        links.style.right = '0';
+        links.style.background = 'rgba(255,255,255,0.96)';
+        links.style.borderBottom = '1px solid rgba(212,175,55,0.18)';
+        links.style.padding = '12px 20px';
+      });
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 980) {
+          links.style = '';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Sigma</title>
+</head>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Fundo da página */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ffffff, #ececec);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container do login */
+.login-container {
+  background-color: #ffffff10;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  width: 320px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+/* Logo */
+.logo img {
+  width: 200px;
+  margin-bottom: 30px;
+}
+
+/* Campos de entrada */
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffffff20;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+}
+
+input::placeholder {
+  color: #ccc;
+}
+
+/* Botão de login */
+/* Estilização geral para todos os botões */
+button {
+  background-color: gold;        
+  color: black;                  
+  border: none;                  
+  padding: 10px 20px;            
+  font-size: 16px;               
+  font-weight: bold;             
+  border-radius: 8px;          
+  cursor: pointer;              
+  transition: all 0.3s ease;     
+}
+
+/* Efeito ao passar o mouse */
+button:hover {
+  background-color: #FFD700;     
+  transform: scale(1.05);        
+}
+
+/* Efeito ao clicar */
+button:active {
+  background-color: #DAA520;     
+  transform: scale(0.95);        
+}
+
+/* Links inferiores */
+.login-links {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.login-links a {
+  color: #0e0e0e;
+  text-decoration: none;
+}
+
+.login-links a:hover {
+  text-decoration: underline;
+}
+</style>
+<body>
+  <div class="login-container">
+    <div class="logo">
+      <img src="logo1.png" alt="Logo Sigma Bode">
+    </div>
+
+    <form action="Menu.html">
+      <input type="text" placeholder="Usuários" name="usuario" required>
+      <input type="password" placeholder="Senha" name="senha" required>
+      <button type="submit">Entrar</button>
+    </form>
+
+    <div class="login-links">
+      <a href="#">Esqueci minha senha</a>
+      <a href="#">Criar conta</a>
+    </div>
+  </div>
+</body>
+</html>
